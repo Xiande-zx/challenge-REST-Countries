@@ -51,7 +51,17 @@ function myFunction(item, index) {
     region.innerHTML = "Region : ".bold() + item.region
     var capital = document.createElement("p")
     capital.innerHTML = "Capital : ".bold() + item.capital
+console.log(item)
+    img.addEventListener('click', function(){
 
+        //cambiar pagina detalle
+        window.location.href='index2.html'
+        //detalle del item click
+        localStorage.setItem('pais',JSON.stringify(item))
+   
+    })
+    
+    
     country.appendChild(img)
     country.appendChild(nameCountry)
     country.appendChild(population)
