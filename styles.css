@@ -11,3 +11,10 @@ img{
 .search{
     margin: 20px;
 }
+.darkModeWhite{
+    
+    color: white !important;
+
+    background-color : hsl(207, 26%, 17%) !important;
+   
+}
