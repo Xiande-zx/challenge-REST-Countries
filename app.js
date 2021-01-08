@@ -19,21 +19,23 @@ function search() {
     var searchArray = [];
 
     console.log(text)
-    for (var i = 0; i < countries.length; i++){
-        
-        if(((countries[i].name).toLowerCase()).includes(text)){
+    for (var i = 0; i < countries.length; i++) {
+
+        if (((countries[i].name).toLowerCase()).includes(text)) {
 
             searchArray.push(countries[i])
         }
     }
 
     searchArray.forEach(myFunction)
+    changeColor()
 }
 
 function filterRegion() {
-    if(filter.value == "none"){
+
+    if (filter.value == "none") {
         callApi("all")
-    }else{
+    } else {
         callApi("region/" + filter.value)
     }
 }
@@ -41,6 +43,8 @@ function filterRegion() {
 function myFunction(item, index) {
 
     var country = document.createElement("div");
+    country.classList.add("whiteBox")
+    country.classList.add("box")
     var img = document.createElement("img")
     img.src = item.flag
     let nameCountry = document.createElement("h3")
@@ -51,17 +55,16 @@ function myFunction(item, index) {
     region.innerHTML = "Region : ".bold() + item.region
     var capital = document.createElement("p")
     capital.innerHTML = "Capital : ".bold() + item.capital
-console.log(item)
-    img.addEventListener('click', function(){
+   
+    img.addEventListener('click', function () {
 
         //cambiar pagina detalle
-        window.location.href='index2.html'
+        window.location.href = 'index2.html'
         //detalle del item click
-        localStorage.setItem('pais',JSON.stringify(item))
-   
+        localStorage.setItem('pais', JSON.stringify(item))
+
     })
-    
-    
+
     country.appendChild(img)
     country.appendChild(nameCountry)
     country.appendChild(population)
@@ -82,13 +85,17 @@ function controlSearch() {
 }
 
 function callApi(par) {
+
     fetch('https://restcountries.eu/rest/v2/' + par)
         .then(function (response) {
+            
             return response.json();
         })
         .then(function (myJson) {
             controlSearch()
             countries = myJson;
             countries.forEach(myFunction)
+            changeColor()
         });
+    
 }
